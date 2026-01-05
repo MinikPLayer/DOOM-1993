@@ -1,0 +1,32 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "label": "Build [make]",
+        "type": "shell",
+        "command": "make",
+        "group": "build",
+        "options": {
+            "cwd": "${workspaceFolder}/linuxdoom-1.10"
+        }
+    },
+    {
+        "label": "Clean [make]",
+        "type": "shell",
+        "command": "make clean",
+        "group": "build",
+        "options": {
+            "cwd": "${workspaceFolder}/linuxdoom-1.10"
+        }
+    },
+    {
+        "label": "Run Xephyr session",
+        "type": "shell",
+        "command": "sudo Xephyr :2 -ac -screen 640x480x8",
+        "group": "none",
+        "problemMatcher": []
+    }
+]
+}

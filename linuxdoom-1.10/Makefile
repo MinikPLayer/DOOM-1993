@@ -6,88 +6,98 @@
 #
 CC=  gcc  # gcc or g++
 
-CFLAGS=-g -Wall -DNORMALUNIX -DLINUX # -DUSEASM 
+CFLAGS=-g -Wall -DNORMALUNIX -DLINUX -Wno-unused-const-variable -Wno-unused-but-set-variable -Wno-misleading-indentation # -DUSEASM 
 LDFLAGS=-L/usr/X11R6/lib
 LIBS=-lXext -lX11 -lnsl -lm
 
 # subdirectory for objects
-O=linux
+DIR_OUTPUT_OBJECT=linux-out
+DIR_OUTPUT_BIN=linux-bin
+DIR_INPUT_WADS=WADs
 
 # not too sophisticated dependency
 OBJS=				\
-		$(O)/doomdef.o		\
-		$(O)/doomstat.o		\
-		$(O)/dstrings.o		\
-		$(O)/i_system.o		\
-		$(O)/i_sound.o		\
-		$(O)/i_video.o		\
-		$(O)/i_net.o			\
-		$(O)/tables.o			\
-		$(O)/f_finale.o		\
-		$(O)/f_wipe.o 		\
-		$(O)/d_main.o			\
-		$(O)/d_net.o			\
-		$(O)/d_items.o		\
-		$(O)/g_game.o			\
-		$(O)/m_menu.o			\
-		$(O)/m_misc.o			\
-		$(O)/m_argv.o  		\
-		$(O)/m_bbox.o			\
-		$(O)/m_fixed.o		\
-		$(O)/m_swap.o			\
-		$(O)/m_cheat.o		\
-		$(O)/m_random.o		\
-		$(O)/am_map.o			\
-		$(O)/p_ceilng.o		\
-		$(O)/p_doors.o		\
-		$(O)/p_enemy.o		\
-		$(O)/p_floor.o		\
-		$(O)/p_inter.o		\
-		$(O)/p_lights.o		\
-		$(O)/p_map.o			\
-		$(O)/p_maputl.o		\
-		$(O)/p_plats.o		\
-		$(O)/p_pspr.o			\
-		$(O)/p_setup.o		\
-		$(O)/p_sight.o		\
-		$(O)/p_spec.o			\
-		$(O)/p_switch.o		\
-		$(O)/p_mobj.o			\
-		$(O)/p_telept.o		\
-		$(O)/p_tick.o			\
-		$(O)/p_saveg.o		\
-		$(O)/p_user.o			\
-		$(O)/r_bsp.o			\
-		$(O)/r_data.o			\
-		$(O)/r_draw.o			\
-		$(O)/r_main.o			\
-		$(O)/r_plane.o		\
-		$(O)/r_segs.o			\
-		$(O)/r_sky.o			\
-		$(O)/r_things.o		\
-		$(O)/w_wad.o			\
-		$(O)/wi_stuff.o		\
-		$(O)/v_video.o		\
-		$(O)/st_lib.o			\
-		$(O)/st_stuff.o		\
-		$(O)/hu_stuff.o		\
-		$(O)/hu_lib.o			\
-		$(O)/s_sound.o		\
-		$(O)/z_zone.o			\
-		$(O)/info.o				\
-		$(O)/sounds.o
+		$(DIR_OUTPUT_OBJECT)/doomdef.o		\
+		$(DIR_OUTPUT_OBJECT)/doomstat.o		\
+		$(DIR_OUTPUT_OBJECT)/dstrings.o		\
+		$(DIR_OUTPUT_OBJECT)/i_system.o		\
+		$(DIR_OUTPUT_OBJECT)/i_sound.o		\
+		$(DIR_OUTPUT_OBJECT)/i_video.o		\
+		$(DIR_OUTPUT_OBJECT)/i_net.o			\
+		$(DIR_OUTPUT_OBJECT)/tables.o			\
+		$(DIR_OUTPUT_OBJECT)/f_finale.o		\
+		$(DIR_OUTPUT_OBJECT)/f_wipe.o 		\
+		$(DIR_OUTPUT_OBJECT)/d_main.o			\
+		$(DIR_OUTPUT_OBJECT)/d_net.o			\
+		$(DIR_OUTPUT_OBJECT)/d_items.o		\
+		$(DIR_OUTPUT_OBJECT)/g_game.o			\
+		$(DIR_OUTPUT_OBJECT)/m_menu.o			\
+		$(DIR_OUTPUT_OBJECT)/m_misc.o			\
+		$(DIR_OUTPUT_OBJECT)/m_argv.o  		\
+		$(DIR_OUTPUT_OBJECT)/m_bbox.o			\
+		$(DIR_OUTPUT_OBJECT)/m_fixed.o		\
+		$(DIR_OUTPUT_OBJECT)/m_swap.o			\
+		$(DIR_OUTPUT_OBJECT)/m_cheat.o		\
+		$(DIR_OUTPUT_OBJECT)/m_random.o		\
+		$(DIR_OUTPUT_OBJECT)/am_map.o			\
+		$(DIR_OUTPUT_OBJECT)/p_ceilng.o		\
+		$(DIR_OUTPUT_OBJECT)/p_doors.o		\
+		$(DIR_OUTPUT_OBJECT)/p_enemy.o		\
+		$(DIR_OUTPUT_OBJECT)/p_floor.o		\
+		$(DIR_OUTPUT_OBJECT)/p_inter.o		\
+		$(DIR_OUTPUT_OBJECT)/p_lights.o		\
+		$(DIR_OUTPUT_OBJECT)/p_map.o			\
+		$(DIR_OUTPUT_OBJECT)/p_maputl.o		\
+		$(DIR_OUTPUT_OBJECT)/p_plats.o		\
+		$(DIR_OUTPUT_OBJECT)/p_pspr.o			\
+		$(DIR_OUTPUT_OBJECT)/p_setup.o		\
+		$(DIR_OUTPUT_OBJECT)/p_sight.o		\
+		$(DIR_OUTPUT_OBJECT)/p_spec.o			\
+		$(DIR_OUTPUT_OBJECT)/p_switch.o		\
+		$(DIR_OUTPUT_OBJECT)/p_mobj.o			\
+		$(DIR_OUTPUT_OBJECT)/p_telept.o		\
+		$(DIR_OUTPUT_OBJECT)/p_tick.o			\
+		$(DIR_OUTPUT_OBJECT)/p_saveg.o		\
+		$(DIR_OUTPUT_OBJECT)/p_user.o			\
+		$(DIR_OUTPUT_OBJECT)/r_bsp.o			\
+		$(DIR_OUTPUT_OBJECT)/r_data.o			\
+		$(DIR_OUTPUT_OBJECT)/r_draw.o			\
+		$(DIR_OUTPUT_OBJECT)/r_main.o			\
+		$(DIR_OUTPUT_OBJECT)/r_plane.o		\
+		$(DIR_OUTPUT_OBJECT)/r_segs.o			\
+		$(DIR_OUTPUT_OBJECT)/r_sky.o			\
+		$(DIR_OUTPUT_OBJECT)/r_things.o		\
+		$(DIR_OUTPUT_OBJECT)/w_wad.o			\
+		$(DIR_OUTPUT_OBJECT)/wi_stuff.o		\
+		$(DIR_OUTPUT_OBJECT)/v_video.o		\
+		$(DIR_OUTPUT_OBJECT)/st_lib.o			\
+		$(DIR_OUTPUT_OBJECT)/st_stuff.o		\
+		$(DIR_OUTPUT_OBJECT)/hu_stuff.o		\
+		$(DIR_OUTPUT_OBJECT)/hu_lib.o			\
+		$(DIR_OUTPUT_OBJECT)/s_sound.o		\
+		$(DIR_OUTPUT_OBJECT)/z_zone.o			\
+		$(DIR_OUTPUT_OBJECT)/info.o				\
+		$(DIR_OUTPUT_OBJECT)/sounds.o
 
-all:	 $(O)/linuxxdoom
+all : create_output_directories $(DIR_OUTPUT_OBJECT)/linuxxdoom copy_bin
 
 clean:
 	rm -f *.o *~ *.flc
-	rm -f linux/*
+	rm -rf $(DIR_OUTPUT_OBJECT)
 
-$(O)/linuxxdoom:	$(OBJS) $(O)/i_main.o
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
-	-o $(O)/linuxxdoom $(LIBS)
+create_output_directories:
+	mkdir -p $(DIR_OUTPUT_OBJECT)
+	mkdir -p $(DIR_OUTPUT_BIN)
 
-$(O)/%.o:	%.c
+copy_bin:
+	cp $(DIR_OUTPUT_OBJECT)/linuxxdoom $(DIR_OUTPUT_BIN)
+	cp -r $(DIR_INPUT_WADS)/* $(DIR_OUTPUT_BIN)/
+
+$(DIR_OUTPUT_OBJECT)/linuxxdoom:  $(OBJS) $(DIR_OUTPUT_OBJECT)/i_main.o
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(DIR_OUTPUT_OBJECT)/i_main.o \
+	-o $(DIR_OUTPUT_OBJECT)/linuxxdoom $(LIBS)
+
+$(DIR_OUTPUT_OBJECT)/%.o:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #############################################################
